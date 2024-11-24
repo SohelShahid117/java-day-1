@@ -1,4 +1,4 @@
-delve-
+delve-গভীরভাবে অনুসন্ধান করা(dig)
 dive in-
 fancy-
 retrieving-
