@@ -99,3 +99,19 @@ db.test.find({age:{$exists:true}})
 //db.collection.find( { field: { $size: 2 } } );
 
 
+//5-7 $all , $elemMatch
+go to : https://www.mongodb.com/docs/manual/reference/operator/query/all/
+//syntax:
+
+//aita arrayr khetre
+{ <field>: { $all: [ <value1> , <value2> ... ] } }
+is equivalent to: { $and: [ { tags: "ssl" }, { tags: "security" } ] }
+//db.test.find({interests:{$all:["Travelling","Gaming","Reading"]}}).project({interests:1})
+
+//db.test.find({$and: [{interests:"Gaming"}]})
+//db.test.find({$and: [{interests:"Travelling"},{interests:"Gaming"},{interests:"Reading"}]})
+//db.test.find({$and: [{"skills.name":"JAVA"},{"skills.level":"Expert"},{"skills.isLearning":true}]})
+
+//aita object er khetre
+{ <field>: { $elemMatch: { <query1>, <query2>, ... } } }
+db.test.find({skills:{$elemMatch: {name:"JAVA",level:"Expert"}}}).project({skills:1})
