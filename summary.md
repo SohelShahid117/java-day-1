@@ -36,3 +36,41 @@ db.test.find({age:{$gte:18,$lte:30},gender:"Female"},{age:1,email:1,gender:1}).s
 db.test.find(
     {age:{$gte:18,$lte:30},gender:"Female",interests:{$in: ["Cooking","Gardening","Travelling"]}},
     {age:1,email:1,gender:1,interests:1}).sort({ age:1 })
+
+
+//5-5 $and, $or, implicit vs explicit
+//implicit and
+db.test.find({age:{$ne:15,$lt:20}},{age:1,gender:"Male"}).sort({ age:1 })
+db.test.find({age:{$ne:15,$lt:20}},{age:1,gender:"Male"}).sort({ age:-1 })
+
+//explicit and:https://www.mongodb.com/docs/manual/reference/operator/query-logical/
+//syntax:
+{ $and: [ { <expression1> }, { <expression2> } , ... , { <expressionN> } ] }
+{ $or: [ { <expression1> }, { <expression2> }, ... , { <expressionN> } ] }
+{ field: { $not: { <operator-expression> } } }
+{ $nor: [ { <expression1> }, { <expression2> }, ...  { <expressionN> } ] }
+
+db.test.find({
+    $and: [
+    {age:{$lte:15}},
+    {gender:"Male"},
+    {age:{$in:[2,4,8,10]}}
+    ]}).project({age:1,gender:1}).sort({age:1})
+
+db.test.find({
+    $or: [
+    {age:{$lte:15}},
+    {gender:"Male"},
+    {age:{$in:[2,4,8,10]}}
+    ]}).project({age:1,gender:1}).sort({age:1})
+
+
+db.test.find({
+    $or: [
+    {age:{$lte:25}},
+    // {gender:"Male"},
+    // {age:{$in:[2,4,8,10]}},
+    // {"skills.name":{$eq:"JAVA"}}--->object in array
+    {"address.street":{$eq:"1188 Lerdahl Point"}}--->object
+    ]})
+    // .project({age:1,gender:1,skills:1}).sort({age:1})
