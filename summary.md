@@ -74,3 +74,28 @@ db.test.find({
     {"address.street":{$eq:"1188 Lerdahl Point"}}--->object
     ]})
     // .project({age:1,gender:1,skills:1}).sort({age:1})
+
+
+//5-6 $exists, $type,$size
+go to : https://www.mongodb.com/docs/manual/reference/operator/query-element/
+https://www.mongodb.com/docs/manual/reference/operator/query/size/
+
+//syntax:
+{ field: { $exists: <boolean> } },
+{ field: { $type: <BSON type> } }
+{ field: { $size: number } }; //size apply hobe only arrayr khetre
+//db.test.find({friends:{$size: 4}})
+//db.test.find({friends:{$size: 0}})
+
+//db.test.find({salary:{$type: "string"}})
+//db.test.find({salary:{$type: "number"}})
+
+db.test.find({age:{$exists:false}})
+//j data golote age filed nai seigolo dekabe 
+
+db.test.find({age:{$exists:true}})
+//age filed ase segolo show korbe
+
+//db.collection.find( { field: { $size: 2 } } );
+
+
