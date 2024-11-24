@@ -115,3 +115,45 @@ is equivalent to: { $and: [ { tags: "ssl" }, { tags: "security" } ] }
 //aita object er khetre
 { <field>: { $elemMatch: { <query1>, <query2>, ... } } }
 db.test.find({skills:{$elemMatch: {name:"JAVA",level:"Expert"}}}).project({skills:1})
+
+
+//5-8 $set, $addToSet, $push
+//syntax:
+{ $set: { <field1>: <value1>, ... } }
+
+db.test.updateOne(
+    //prothome find korbo _id field die 
+    {"_id" : ObjectId("6406ad64fc13ae5a40000079")},
+    //then update korbo
+    {
+        $set: {
+            "age":700
+        }
+    })
+
+db.test.updateOne(
+    {"_id" : ObjectId("6406ad64fc13ae5a40000079")},
+    {
+        $set: {
+            "age":700,
+            "gender":"male",
+            "address" : {
+		    "street" : "Bahaddarhat",
+		    "city" : "Ctg",
+		    "country" : "BD"
+	    },
+    }
+})
+
+//addToSet:use for update or add  new value in an array
+{ $addToSet: { <field1>: <value1>, ... } }
+
+{ $push: { <field1>: <value1>, ... } }
+
+db.test.updateOne(
+    {"_id" : ObjectId("6406ad64fc13ae5a40000079")},
+    {
+        // $push:{interests:{$each: [ "gender","male","quality","good"]}}
+        $push:{interests:[ "genderyy","maleyy","qualityyy","goodyy"]}
+    })
+
