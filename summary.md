@@ -157,3 +157,51 @@ db.test.updateOne(
         $push:{interests:[ "genderyy","maleyy","qualityyy","goodyy"]}
     })
 
+
+//5-9 $unset, $pop, $pull, $pullAll
+go to : https://www.mongodb.com/docs/manual/reference/operator/update/
+
+//$unset:syntax:
+{ $unset: { <field1>: "", ... } }
+
+db.test.updateOne(
+    {"_id" : ObjectId("6406ad64fc13ae5a40000085")},
+    {
+        $unset: {"email":"","age":"","phone":"","gender":""}
+    }
+    )
+
+//$pop:syntax:
+{ $pop: { <field>: <-1 | 1>, ... } }
+//pop means remove last element from array;1 bolte tikiii laster element bojai r -1 bolte firster element bojai. 
+
+db.test.updateOne(
+    {"_id" : ObjectId("6406ad64fc13ae5a40000085")},
+    {
+        // $pop: {"friends":1} //remove last elemnt from array
+        $pop: {"friends":-1}  //remove first element from array
+    }
+    )
+
+
+//$pull:
+{ $pull: { <field1>: <value|condition>, <field2>: <value|condition>, ... } }
+
+db.test.updateOne(
+    {"_id" : ObjectId("6406ad64fc13ae5a40000085")},
+    {
+        $pull: {languages:"bangla"}
+        //$pull: {"languages": {$in:["Azeri", "Icelandic"] }} //remove specific item
+    }
+    )
+
+
+//remove all item:$pullAll
+{ $pullAll: { <field1>: [ <value1>, <value2> ... ], ... } }
+
+db.test.updateOne(
+    {"_id" : ObjectId("6406ad64fc13ae5a40000085")},
+    {
+        $pullAll: {friends:["Nahid Hasan Bulbul","Mizanur Rahman"]}
+    }
+    )
