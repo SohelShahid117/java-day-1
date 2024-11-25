@@ -223,3 +223,12 @@ db.test.updateOne(
         $inc: {"age":2}
     }
     )
+
+//5-11 delete documents, drop collection and how to explore by yourself
+//https://www.mongodb.com/docs/mongodb-shell/crud/delete/
+delete one document:
+db.test.deleteOne({"_id" : ObjectId("6406ad64fc13ae5a40000084")})
+
+//create collection
+https://www.mongodb.com/docs/manual/reference/method/db.createCollection/
+https://www.w3schools.com/mongodb/mongodb_mongosh_create_collection.php
