@@ -205,3 +205,21 @@ db.test.updateOne(
         $pullAll: {friends:["Nahid Hasan Bulbul","Mizanur Rahman"]}
     }
     )
+
+//5-10 More about $set, how to explore documentation
+//update in object
+db.test.updateOne(
+    {"_id" : ObjectId("6406ad64fc13ae5a40000085")},
+    {
+        $set: {"address.city":"Ctg"}
+    }
+    )
+    //explore update:https://www.mongodb.com/docs/manual/reference/operator/update/set/
+    //for increment use $inc
+    db.test.updateOne(
+    {"_id" : ObjectId("6406ad64fc13ae5a40000085")},
+    {
+        // $set: {"age":87}
+        $inc: {"age":2}
+    }
+    )
